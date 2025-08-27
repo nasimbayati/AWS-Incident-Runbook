@@ -1,69 +1,83 @@
-# React + TypeScript + Vite
+# 🚨 AWS Incident Rescue Runbook (Desktop App)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An Electron + React + Vite desktop application that provides a structured, step-by-step runbook for cloud incident response, with a focus on **AWS environments**.  
+This tool helps engineers and responders **declare, triage, preserve, and investigate incidents** efficiently while maintaining audit readiness.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📖 Overview
+The **Incident Rescue Runbook** streamlines the incident response process by offering:
+- Predefined **incident steps** (declaration, logging, containment, evidence preservation, communication).
+- **Audit metadata capture** (severity, AWS account ID, incident commander, notes).
+- **Exportable audit reports** for compliance and postmortems.
+- A **clean, offline-first desktop experience** packaged as a `.exe`.
 
-## Expanding the ESLint configuration
+This project demonstrates how cloud engineers can operationalize best practices into **tools** that improve **response speed, accuracy, and repeatability**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Features
+- 📝 Guided runbook steps with context and example commands.
+- ⚠️ Severity classification & metadata tracking.
+- 📊 Exportable audit logs (JSON/CSV).
+- 🎨 Clean UI built with **React + TailwindCSS**.
+- 🖥️ Cross-platform desktop app powered by **Electron**.
+- 🔒 Local-only (no external dependencies required during runtime).
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 How to Run (Development Mode)
+```bash
+# clone the repository
+git clone https://github.com/<your-username>/incident-rescue-runbook.git
+cd incident-rescue-runbook/runbook-ui
+
+# install dependencies
+npm install
+
+# run in dev mode
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Open the app at:
+👉 http://127.0.0.1:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## How to Build Executable (.exe for Windows)
+```bash
+# close any previous instances
+taskkill /IM "Incident Rescue Runbook.exe" /F 2>$null
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# build production web assets
+npm run build:web
+
+# package into .exe (installer + portable)
+npm run build:win
 ```
+
+Resulting files will be in the `dist/` folder:
+
+* `Incident Rescue Runbook Setup <version>.exe` → Installer
+
+* `runbook-ui <version>.exe` → Portable (no installation required)
+
+## 📂 Project Structure
+```csharp
+runbook-ui/
+ ├── electron/           # Electron main & preload scripts
+ ├── src/                # React components
+ ├── public/             # Static assets (icons, logos)
+ ├── dist/               # Build outputs
+ ├── package.json        # Project metadata & scripts
+ └── vite.config.ts      # Vite config
+```
+
+## 📸 Screenshot
+
+Here’s what the app looks like running in Windows:
+
+![Incident Rescue Runbook UI](./screenshots/app-ui.png)
+
+
+## Author
+
+Nasim Bayati
